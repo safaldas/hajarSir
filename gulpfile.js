@@ -13,7 +13,7 @@ var gulp = require('gulp'),
 var config = {
     paths: {
         css: [
-            'node_modules/bootstrap/dist/css/bootstrap.css',
+            
             './src/css/**/*.css'
         ],
         less: ['./src/less/**/*.less'],
@@ -23,7 +23,6 @@ var config = {
         app: './src/app.js',
         images: './src/images/**/*.*',
         fonts: [
-            'node_modules/bootstrap/dist/fonts/*.*',
             './src/fonts/**/*.*'
         ]
     },

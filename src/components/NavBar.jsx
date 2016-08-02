@@ -1,14 +1,24 @@
 import React from 'react';
 import DateBar from './DateBar';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import ImageNavigateNext from 'material-ui/svg-icons/image/navigate-next';
+import ImageNavigateBefore from 'material-ui/svg-icons/image/navigate-before';
 
 
 const NavBar = () => {
 	return (
-		<div className='row lead text-center' >
-			<button className="col-md-3 col-sm-3 col-xs-3 btn btn-lg"> prev </button>
-			<DateBar />
-			<button className="col-md-3 col-sm-3 col-xs-3 btn btn-lg"> next</button>
-		</div>
+		<AppBar
+		    title={<DateBar />}
+		    iconElementLeft={  <IconButton tooltip="prev">
+      								<ImageNavigateBefore/>
+   								</IconButton>}
+		    iconElementRight={  <IconButton tooltip="next">
+      								<ImageNavigateNext/>
+   								</IconButton>}
+		    >
+		</AppBar>
 	);
 }
 

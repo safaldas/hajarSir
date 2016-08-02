@@ -5,7 +5,7 @@ import Year from './Year';
 
 const DateBar = () => {
 	return (
-		<div className='col-md-6 col-sm-6 col-xs-6 btn button-green btn-lg ' >
+		<div className='title' >
 			<Date />
 			<Month />
 			<Year />

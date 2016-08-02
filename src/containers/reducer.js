@@ -44,8 +44,12 @@ export default (state = initialState, action = {}) => {
             return newState;
         case "REMOVE_ITEM":
             newState = Object.assign({}, state);
+            if (newState.periods[newState.total - 1].checked) {
+                newState.attendance-=1;
+            }
             newState.periods.pop();
             newState.total -= 1;
+
             return newState;
         default:
             newState = Object.assign({}, state);
