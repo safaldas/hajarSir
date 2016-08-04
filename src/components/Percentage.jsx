@@ -21,7 +21,7 @@ const Percentage = React.createClass( {
 		let percent = this.state.data.attendance/this.state.data.total*100 || 0;
 	
 		return (
-      			<span style={{fontSize:'26px'}}>{percent.toPrecision(4)}%</span>				
+      			<span style={{fontSize:'26px'}}>So you have {percent.toPrecision(4)}% attendance?</span>				
 		   
 			 
 		);
