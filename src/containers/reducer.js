@@ -1,28 +1,51 @@
+import cloneDeep from 'lodash/cloneDeep';
 const initialState = {
-    periods: [{
-            id: 1,
-            checked: false
-        }, {
-            id: 2,
-            checked: false
-        }, {
-            id: 3,
-            checked: false
-        }, {
-            id: 4,
-            checked: false
-        },
-
-    ],
+    now: '',
+    date: {},
     attendance: 0,
-    total: 4
+    total: 0
 };
-let newState = {};
+
+let newState = {},
+    sampleObject={
+        periods: [/*{
+                id: 1,
+                checked: false
+            }, {
+                id: 2,
+                checked: false
+            }, {
+                id: 3,
+                checked: false
+            }, {
+                id: 4,
+                checked: false
+            },*/
+        ]
+    };
+const today = new Date(),
+    date = today.toDateString().replace(/ /g, '_');
+let dummy = {};
+initialState.now = date;
+initialState.date = today;
+initialState[initialState.now]=cloneDeep(sampleObject);
+console.log('came here');
+
+function CreateAndSetObject(newState) {
+    if (newState.now in newState) { 
+                        return newState;
+                    }
+                    newState[newState.now]=cloneDeep(sampleObject);
+                    newState.total += newState[newState.now].periods.length;
+                    return newState;
+}
 export default (state = initialState, action = {}) => {
+
+
     switch (action.type) {
         case "UPDATE_STATE":
-            newState = Object.assign({}, state);
-            initialState.periods.map(function(object, index) {
+            newState = cloneDeep(state);
+            newState[newState.now].periods.map(function(object, index) {
                 if (object.id === action.id) {
                     object.checked = !object.checked;
                     if (object.checked) {
@@ -35,24 +58,49 @@ export default (state = initialState, action = {}) => {
             });
             return newState;
         case "ADD_ITEM":
-            newState = Object.assign({}, state);
-            newState.periods.push({
-                id: newState.periods.length + 1,
+            newState = cloneDeep( state);
+            newState[newState.now].periods.push({
+                id: newState[newState.now].periods.length + 1,
                 checked: false
             });
             newState.total += 1;
             return newState;
         case "REMOVE_ITEM":
-            newState = Object.assign({}, state);
-            if (newState.periods[newState.total - 1].checked) {
-                newState.attendance-=1;
+            newState = cloneDeep( state);
+            if (newState[newState.now].periods.length ===0){
+                return newState;
             }
-            newState.periods.pop();
+            else if (newState[newState.now].periods[newState[newState.now].periods.length- 1].checked) {
+                newState.attendance -= 1;
+            }
+            newState[newState.now].periods.pop();
             newState.total -= 1;
 
             return newState;
+        case "SET_DATE":
+            
+            newState = cloneDeep(state);
+            newState.date = action.date;
+            newState.now=action.date.toDateString().replace(/ /g, '_');
+            return CreateAndSetObject(newState);
+        case "DATE_NAV":
+            newState = cloneDeep( state);
+            switch(action.option){
+                case 'next': 
+                    dummy = new Date(newState.date.getTime() + (24 * 60 * 60 * 1000));
+                    newState.date = dummy;
+                    newState.now=dummy.toDateString().replace(/ /g, '_');
+                    return CreateAndSetObject(newState);
+                case 'prev':
+                    dummy = new Date(newState.date.getTime() - (24 * 60 * 60 * 1000));
+                    newState.date = dummy;
+                    newState.now=dummy.toDateString().replace(/ /g, '_');
+                    return CreateAndSetObject(newState);
+                default:
+                    return newState;
+            }
         default:
-            newState = Object.assign({}, state);
+            newState = cloneDeep( state);
             return newState;
     }
 }

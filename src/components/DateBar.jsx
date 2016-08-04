@@ -1,14 +1,9 @@
 import React from 'react';
-import Date from './Date';
-import Month from './Month';
-import Year from './Year';
-
+import store from '../containers/store'
 const DateBar = () => {
 	return (
 		<div className='title' >
-			<Date />
-			<Month />
-			<Year />
+			{store.getState().now.replace(/_/g,' ').replace(' ',', ')}
 		</div>
 	);
 }

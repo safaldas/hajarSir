@@ -11,5 +11,25 @@
   <div id="app" class=""></div>
 
   <script type="text/javascript" src="js/bundle.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD_Vt4f7sw_lNR38cnUIFMzWT_grIi76nU",
+    authDomain: "hajar-sir.firebaseapp.com",
+    databaseURL: "https://hajar-sir.firebaseio.com",
+    storageBucket: "",
+  };
+  firebase.initializeApp(config);
+
+  var db = firebase.database();
+
+  db.ref('/periods').push({
+  	id:1,
+  	value: true
+  });
+</script>
+    
 </body>
 </html>
