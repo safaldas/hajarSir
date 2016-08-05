@@ -14,13 +14,7 @@ let newState = {},
             }, {
                 id: 2,
                 checked: false
-            }, {
-                id: 3,
-                checked: false
-            }, {
-                id: 4,
-                checked: false
-            },*/
+            }*/
         ]
     };
 const today = new Date(),

@@ -4,19 +4,47 @@ import NavBar from './NavBar';
 import AttendanceContainer from './AttendanceContainer';
 import Percentage from './Percentage';
 import {Card,CardHeader} from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import IconMenu from 'material-ui/IconMenu';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import MenuItem from 'material-ui/MenuItem';
+import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 
-let text="Your attendance percentage is" +<Percentage/> ;
+
+import EditIcon from 'material-ui/svg-icons/image/edit';
+
 class App extends React.Component {
 	
 	render(){
 		return (
 			<div >
 				<NavBar/>
+				<Toolbar>
+					<ToolbarGroup  firstChild={true}>
+						
+					</ToolbarGroup>
+					<ToolbarGroup>
+			          <ToolbarTitle text="Options" />
+			          <ToolbarSeparator />
+			          <RaisedButton id='signInButton' label="Sign in" primary={true} />
+			          <IconMenu style={{display:'none'}}
+			            iconButtonElement={
+			              <IconButton touch={true}>
+			                <AccountIcon />
+			              </IconButton>
+			            }
+			          >
+			            <MenuItem primaryText="Download" />
+			            <MenuItem primaryText="More Info" />
+			          </IconMenu>
+			        </ToolbarGroup>
+				</Toolbar>
 				<Card>
 				<CardHeader
 					title={<Percentage/>}
 				/>
-				
+	
 				<AttendanceContainer />
 				</Card>
 				

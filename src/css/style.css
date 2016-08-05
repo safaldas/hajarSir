@@ -5,4 +5,11 @@ body{
 .title{
 	text-align: center;
 	cursor: pointer;
+}#signInButton{
+
+}
+.userIcon{
+	display: none;
+	background-color: red;
+
 }
