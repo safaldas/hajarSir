@@ -13,13 +13,14 @@ var database = firebase.database();
 var uid = '';
 auth.onAuthStateChanged(function(user) {
     if (user) {
-      //user.uid is important dont deelete
+      //user.uid is important dont delete
         uid= user.uid;
-        store.dispatch({type:'USER_AUTH',user:user});
+        store.dispatch({type:'USER_AUTH',login:true,user:user});
         getData();
 
     } else {
-        console.log("stupid method");
+        //user loged out
+        store.dispatch({type:'USER_AUTH',login:false});
     }
 });
 export var signIn = function() {

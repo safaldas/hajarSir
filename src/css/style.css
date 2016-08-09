@@ -5,11 +5,9 @@ body{
 .title{
 	text-align: center;
 	cursor: pointer;
-}#signInButton{
-
 }
-.userIcon{
-	display: none;
-	background-color: red;
-
+@media only screen and (max-width: 510px) {
+.name{
+display: none;
+}
 }
