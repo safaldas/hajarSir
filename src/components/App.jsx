@@ -10,13 +10,14 @@ import IconMenu from 'material-ui/IconMenu';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
-
-
+import {signIn,signOut,saveToFirebase} from '../firebaseConfig.js';
+import Avatar from 'material-ui/Avatar';
 import EditIcon from 'material-ui/svg-icons/image/edit';
-
+import store from '../containers/store';
 class App extends React.Component {
 	
 	render(){
+		
 		return (
 			<div >
 				<NavBar/>
@@ -27,17 +28,19 @@ class App extends React.Component {
 					<ToolbarGroup>
 			          <ToolbarTitle text="Options" />
 			          <ToolbarSeparator />
-			          <RaisedButton id='signInButton' label="Sign in" primary={true} />
-			          <IconMenu style={{display:'none'}}
-			            iconButtonElement={
-			              <IconButton touch={true}>
-			                <AccountIcon />
-			              </IconButton>
-			            }
-			          >
-			            <MenuItem primaryText="Download" />
-			            <MenuItem primaryText="More Info" />
-			          </IconMenu>
+			          <RaisedButton ref='signInButton' 
+			          				label="Sign in"
+			          				onTouchTap={signIn}
+			          				primary={true} />
+			          <RaisedButton ref='signOutButton' 
+			          				label="Sign Out"
+			          				onTouchTap={signOut}
+			          				secondary={true} />
+					  <RaisedButton ref='saveButton' 
+									label="Save"
+									onTouchTap={saveToFirebase}
+									primary={true} />
+			           
 			        </ToolbarGroup>
 				</Toolbar>
 				<Card>

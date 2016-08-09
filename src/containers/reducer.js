@@ -1,5 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 const initialState = {
+    name:'',
+    photoURL:'',
     now: '',
     date: {},
     attendance: 0,
@@ -21,7 +23,7 @@ const today = new Date(),
     date = today.toDateString().replace(/ /g, '_');
 let dummy = {};
 initialState.now = date;
-initialState.date = today;
+initialState.date = today.getTime();
 initialState[initialState.now]=cloneDeep(sampleObject);
 console.log('came here');
 
@@ -37,6 +39,15 @@ export default (state = initialState, action = {}) => {
 
 
     switch (action.type) {
+        case "USER_AUTH":
+            newState =cloneDeep(state);
+            newState.name =action.user.displayName;
+            newState.photoURL=action.user.photoURL;
+            return newState;
+        case "LOAD_STORE":
+            newState = cloneDeep(state);
+            newState = action.store;
+            return newState;
         case "UPDATE_STATE":
             newState = cloneDeep(state);
             newState[newState.now].periods.map(function(object, index) {
@@ -74,21 +85,25 @@ export default (state = initialState, action = {}) => {
         case "SET_DATE":
             
             newState = cloneDeep(state);
-            newState.date = action.date;
+            newState.date = action.date.getTime();
             newState.now=action.date.toDateString().replace(/ /g, '_');
             return CreateAndSetObject(newState);
         case "DATE_NAV":
             newState = cloneDeep( state);
             switch(action.option){
                 case 'next': 
-                    dummy = new Date(newState.date.getTime() + (24 * 60 * 60 * 1000));
+                console.log(newState.date);
+                    dummy = newState.date + (24 * 60 * 60 * 1000);
+                    console.log(dummy);
                     newState.date = dummy;
-                    newState.now=dummy.toDateString().replace(/ /g, '_');
+                    newState.now=new Date(dummy).toDateString().replace(/ /g, '_');
                     return CreateAndSetObject(newState);
                 case 'prev':
-                    dummy = new Date(newState.date.getTime() - (24 * 60 * 60 * 1000));
+                console.log(newState.date);
+                    dummy = newState.date - (24 * 60 * 60 * 1000);
+                    console.log(dummy);
                     newState.date = dummy;
-                    newState.now=dummy.toDateString().replace(/ /g, '_');
+                    newState.now=new Date(dummy).toDateString().replace(/ /g, '_');
                     return CreateAndSetObject(newState);
                 default:
                     return newState;
