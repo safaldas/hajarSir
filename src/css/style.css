@@ -6,3 +6,8 @@ body{
 	text-align: center;
 	cursor: pointer;
 }
+@media only screen and (max-width: 510px) {
+.name{
+display: none;
+}
+}

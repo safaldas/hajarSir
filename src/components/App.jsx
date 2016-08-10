@@ -1,22 +1,24 @@
 import React from 'react';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import NavBar from './NavBar';
 import AttendanceContainer from './AttendanceContainer';
 import Percentage from './Percentage';
 import {Card,CardHeader} from 'material-ui/Card';
+import ToolBar from './ToolBar';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 
-let text="Your attendance percentage is" +<Percentage/> ;
 class App extends React.Component {
 	
 	render(){
+		
 		return (
 			<div >
 				<NavBar/>
+				<ToolBar/>
 				<Card>
 				<CardHeader
 					title={<Percentage/>}
 				/>
-				
+	
 				<AttendanceContainer />
 				</Card>
 				
