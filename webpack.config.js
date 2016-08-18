@@ -6,13 +6,14 @@ module.exports = {
     ],
     module: {
         loaders: [
-            { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" }
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
         ]
     },
+    watch:true,
     output:{
-    	filename:'js/bundle.js',
+    	filename:'static/js/bundle.js',
     	path:__dirname +'/dist',
-         sourceMapFile: "js/app.map"
+        sourceMapFile: "static/js/bundle.js.map"
     },
     resolve: {
         extensions: ['', '.jsx', '.js']

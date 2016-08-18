@@ -26,7 +26,6 @@ let dummy = {};
 initialState.now = date;
 initialState.date = today.getTime();
 initialState[initialState.now] = cloneDeep(sampleObject);
-console.log('came here');
 
 function CreateAndSetObject(newState) {
     if (newState.now in newState) {
@@ -99,16 +98,12 @@ export default (state = initialState, action = {}) => {
             newState = cloneDeep(state);
             switch (action.option) {
                 case 'next':
-                    console.log(newState.date);
                     dummy = newState.date + (24 * 60 * 60 * 1000);
-                    console.log(dummy);
                     newState.date = dummy;
                     newState.now = new Date(dummy).toDateString().replace(/ /g, '_');
                     return CreateAndSetObject(newState);
                 case 'prev':
-                    console.log(newState.date);
                     dummy = newState.date - (24 * 60 * 60 * 1000);
-                    console.log(dummy);
                     newState.date = dummy;
                     newState.now = new Date(dummy).toDateString().replace(/ /g, '_');
                     return CreateAndSetObject(newState);

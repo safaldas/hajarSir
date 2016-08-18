@@ -3,17 +3,16 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     stream = browserSync.stream,
     less = require('gulp-less'),
-    cssmin = require('gulp-minify-css'),
+    cssmin = require('gulp-clean-css'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     webpack = require('webpack-stream'),
-    runSync = require('run-sequence'),
-    pump = require('pump');
+    script = require('child_process');
 
 var config = {
     paths: {
         css: [
-            
+
             './src/css/**/*.css'
         ],
         less: ['./src/less/**/*.less'],
@@ -27,11 +26,11 @@ var config = {
         ]
     },
     dest: {
-        style: 'styles/style.css',
+        style: 'static/styles/style.css',
         dist: 'dist/',
         less: 'src/css',
-        images: 'dist/images',
-        fonts: 'dist/fonts'
+        images: 'dist/static/images',
+        fonts: 'dist/static/fonts'
     }
 
 };
@@ -42,7 +41,7 @@ gulp
     })
 
 .task('server', () => {
-    browserSync.init({ server: { baseDir: 'dist/' } });
+    browserSync.init({ server: { baseDir: 'dist' } });
 
 })
 
@@ -112,9 +111,10 @@ gulp
             [config.paths.css, config.paths.less], ['css:min', browserSync.reload]
         );
     })
+
     .task('watch:js', () => {
         return gulp.watch(
-            [config.paths.js, config.paths.jsx], ['js', browserSync.reload]
+            [config.dest], [browserSync.reload]
         );
     })
     .task('watch:html', () => {
@@ -126,11 +126,7 @@ gulp
      * Compiling resources and serving application
      */
 
-.task('start', ['html', 'fonts', 'images', 'css:min', 'js', 'server', 'watch:css', 'watch:js', 'watch:html'])
+.task('start', ['html', 'fonts', 'images', 'css:min', 'js','server','watch:css', 'watch:html'])
     .task('bundle', ['html', 'fonts', 'images', 'css', 'js'])
     .task('bundle:min', ['html', 'fonts', 'images', 'css:min', 'js:min'])
-
-.task('dev-server', () => {
-        runSync('clean', 'start')
-    })
     .task('default', ['start']);

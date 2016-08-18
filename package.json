@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gulp-clean-css": "^2.0.12",
     "html-webpack-plugin": "^2.22.0"
   },
   "dependencies": {

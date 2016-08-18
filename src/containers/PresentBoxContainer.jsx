@@ -46,7 +46,7 @@ const CheckBox =(item) =>{
 						} >  
 
 		        <Checkbox id={item.id}
-		        disableTouchRipple={true}
+		        		  disableTouchRipple={true}
 		        		  style={{width:'100px',height:'100px',padding:'0'}} 
 	       				  defaultChecked={item.checked}
 	      				  checkedIcon={<CheckCircle style={{width:'40px',height:'40px',left:'78%',top:'90%',fill:'#32c786'}} color={green400}/>}
