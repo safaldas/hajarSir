@@ -23,6 +23,7 @@ const NavBar= React.createClass({
 			stateData = store.getState();
 			this.setState(stateData);
 		});
+		console.log('in NavBar componentDidMount');
 	},
 	render:function(){
 		return (

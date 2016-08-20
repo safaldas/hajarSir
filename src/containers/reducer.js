@@ -5,7 +5,8 @@ const initialState = {
     now: '',
     date: {},
     attendance: 0,
-    total: 0
+    total: 0,
+    allDates:[]
 };
 
 let newState = {},
@@ -26,7 +27,7 @@ let dummy = {};
 initialState.now = date;
 initialState.date = today.getTime();
 initialState[initialState.now] = cloneDeep(sampleObject);
-
+console.log('in reducer');
 function CreateAndSetObject(newState) {
     if (newState.now in newState) {
         return newState;
@@ -53,6 +54,7 @@ export default (state = initialState, action = {}) => {
             }
         case "LOAD_STORE":
             newState = cloneDeep(state);
+            console.log('loading');
             newState = action.store;
             return newState;
         case "UPDATE_STATE":
@@ -65,17 +67,23 @@ export default (state = initialState, action = {}) => {
                     } else {
                         newState.attendance -= 1;
                     }
-                }
+                }     
 
             });
             return newState;
         case "ADD_ITEM":
             newState = cloneDeep(state);
+            console.log('camehere');
             newState[newState.now].periods.push({
                 id: newState[newState.now].periods.length + 1,
                 checked: false
             });
             newState.total += 1;
+            console.log(newState.allDates,"came here");
+            if(!!newState.allDates.indexOf(newState.now)){
+                newState.allDates.push(newState.now);
+                console.log(newState.allDates);
+            }
             return newState;
         case "REMOVE_ITEM":
             newState = cloneDeep(state);
